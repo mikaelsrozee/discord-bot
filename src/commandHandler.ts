@@ -1,6 +1,10 @@
-import {Message, Emoji} from 'discord.js'
-import {dev, errMessage, prefix} from './helpers/env'
+import {Message} from 'discord.js'
+import {errMessage, prefix} from './helpers/env'
 import {readdirSync} from 'fs'
+import Database from './helpers/db'
+
+// Create local database
+const db = new Database()
 
 interface Command {
     name: string,
