@@ -11,3 +11,6 @@ function addEventListeners() {
 addEventListeners()
 
 client.login(process.env.BOT_TOKEN)
+
+import Database from './helpers/db'
+const db = new Database()
