@@ -28,12 +28,14 @@ export function processMessage(message: Message) {
     // Ignore wrongly prefixed messages and messages from this bot
     if (!message.content.startsWith(prefix) || message.author.bot) return
 
-    // Split args from 
+    // Split args from key 
     const args = message.content.slice(prefix.length).trim().split(/ +/)
     const key = args.shift()?.toLowerCase() || ''
 
+    // Resolve function
     const fn = commands.get(key)?.execute || (() => message.reply(errMessage))
 
+    // Run
     fn(message)
 }
 
