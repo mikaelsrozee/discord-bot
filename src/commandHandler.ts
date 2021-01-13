@@ -36,7 +36,7 @@ export function processMessage(message: Message) {
     const fn = commands.get(key)?.execute || (() => message.reply(errMessage))
 
     // Run
-    fn(message)
+    fn(message, args, db)
 }
 
 initCommands()
