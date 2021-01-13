@@ -25,9 +25,11 @@ module.exports = {
         const canvas = Canvas.createCanvas(574, 548)
         const ctx = canvas.getContext('2d')
 
+        Canvas.registerFont('./src/assets/impact.ttf', {family: 'Impact'})
+
         // Constants used for text positioning
         const xPadding = 50 
-        const yPadding = 50 + (boomerText.length > 10 ? 20 : 0)
+        const yPadding = 50 + (boomerText.length > 10 ? 40 : 0)
 
         // Apply meme text in maximum size possible
         const applyText = (canvas: Canvas.Canvas, text: string) => {
