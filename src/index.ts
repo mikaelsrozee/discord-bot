@@ -1,6 +1,8 @@
 import {Client} from 'discord.js'
 import {processMessage} from './commandHandler'
 
+require('dotenv').config()
+
 // Create Discord client, create commands map
 const client:Client = new Client()
 

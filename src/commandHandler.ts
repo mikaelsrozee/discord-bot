@@ -1,6 +1,10 @@
-import {Message, Emoji} from 'discord.js'
-import {dev, errMessage, prefix} from './helpers/env'
+import {Message} from 'discord.js'
+import {errMessage, prefix} from './helpers/env'
 import {readdirSync} from 'fs'
+import Database from './helpers/db'
+
+// Create local database
+const db = new Database()
 
 interface Command {
     name: string,
@@ -24,13 +28,15 @@ export function processMessage(message: Message) {
     // Ignore wrongly prefixed messages and messages from this bot
     if (!message.content.startsWith(prefix) || message.author.bot) return
 
-    // Split args from 
+    // Split args from key 
     const args = message.content.slice(prefix.length).trim().split(/ +/)
     const key = args.shift()?.toLowerCase() || ''
 
+    // Resolve function
     const fn = commands.get(key)?.execute || (() => message.reply(errMessage))
 
-    fn(message)
+    // Run
+    fn(message, args, db)
 }
 
 initCommands()
