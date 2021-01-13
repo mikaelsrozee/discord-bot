@@ -1,5 +1,5 @@
 import {Message} from 'discord.js'
-import {errMessage, prefix} from './helpers/env'
+import {errMessage, prefix, dev} from './helpers/env'
 import {readdirSync} from 'fs'
 import Database from './helpers/db'
 
@@ -33,7 +33,7 @@ export function processMessage(message: Message) {
     const key = args.shift()?.toLowerCase() || ''
 
     // Resolve function
-    const fn = commands.get(key)?.execute || (() => message.reply(errMessage))
+    const fn = commands.get(key)?.execute || (() => {if (dev) message.reply(errMessage)})
 
     // Run
     fn(message, args, db)
